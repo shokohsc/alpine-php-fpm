@@ -1,4 +1,4 @@
-/config/log/php/*.log {
+/var/log/php/*.log {
         rotate 7
         weekly
         missingok
@@ -10,5 +10,5 @@
         postrotate
                 s6-svc -t /var/run/s6/services/php-fpm
         endscript
-        su abc abc
+        su www-data www-data
 }

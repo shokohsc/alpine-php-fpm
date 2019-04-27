@@ -1,4 +1,6 @@
-FROM base:alpine-3.8
+FROM shokohsc/alpine-s6
+
+ENV WORKDIR "/var/www/symfony"
 
 # install packages
 RUN \
@@ -39,13 +41,30 @@ RUN \
 	php7-simplexml \
 	php7-xml \
 	php7-xmlwriter \
+    php7-opcache \
+    php7-apcu \
 	php7-zlib && \
  echo "**** fix logrotate ****" && \
  sed -i "s#/var/log/messages {}.*# #g" /etc/logrotate.conf
 
+# dev
+RUN \
+ echo "**** install dev build packages ****" && \
+ apk add --no-cache \
+	make \
+    php7-xdebug \
+    php-pcntl \
+    php-posix && \
+ curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+   composer --version && \
+   composer global require hirak/prestissimo
+
+
 # add local files
-COPY root/ /
+ADD root/ /
 
 # ports and volumes
 EXPOSE 9000
-VOLUME /config
+VOLUME /var/www/symfony
+
+WORKDIR ${WORKDIR}
