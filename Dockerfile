@@ -43,11 +43,19 @@ RUN \
  sed -i "s#/var/log/messages {}.*# #g" /etc/logrotate.conf
 
  # Rar Extension
- RUN pecl install rar && \
-     touch /etc/php7/conf.d/rar.ini && \
-     echo 'extension=rar.so' >> /etc/php7/conf.d/rar.ini && \
-     chown app:app /etc/php7/conf.d/rar.ini && \
-     chmod 664 /etc/php7/conf.d/rar.ini
+ RUN apk add --no-cache \
+    php7-pear \
+    php7-dev \
+    gcc \
+    g++ \
+    musl-dev \
+    make \
+    unrar && \
+    pecl install rar && \
+    touch /etc/php7/conf.d/rar.ini && \
+    echo 'extension=rar.so' >> /etc/php7/conf.d/rar.ini && \
+    chown app:app /etc/php7/conf.d/rar.ini && \
+    chmod 664 /etc/php7/conf.d/rar.ini
 
 
 # add local files
