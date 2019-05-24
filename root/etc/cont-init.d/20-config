@@ -106,5 +106,5 @@ chmod -R 644 /etc/logrotate.d
 # docker
 grep -q 'ping' /etc/group && delgroup ping
 grep -qxF 'docker' /etc/group || addgroup -g 999 docker
-groups www-data |grep docker || addgroup www-data docker
-groups www-data |grep root || addgroup www-data root
+groups app |grep docker || addgroup app docker
+groups app |grep root || addgroup app root
