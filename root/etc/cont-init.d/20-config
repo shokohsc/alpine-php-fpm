@@ -108,3 +108,6 @@ grep -q 'ping' /etc/group && delgroup ping
 grep -qxF 'docker' /etc/group || addgroup -g 999 docker
 groups app |grep docker || addgroup app docker
 groups app |grep root || addgroup app root
+
+# ping capability
+chmod u+s /bin/ping
