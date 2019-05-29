@@ -39,6 +39,7 @@ RUN \
     php7-opcache \
     php7-apcu \
     php7-intl \
+    php7-simplexml \
 	php7-zlib && \
  echo "**** fix logrotate ****" && \
  sed -i "s#/var/log/messages {}.*# #g" /etc/logrotate.conf
