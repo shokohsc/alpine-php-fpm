@@ -1,10 +1,11 @@
-FROM shokohsc/alpine-s6
+FROM shokohsc/alpine-s6:3.9
 
 ENV WORKDIR "/var/www/symfony"
 
 # install packages
 RUN \
  echo "**** install build packages ****" && \
+ apk update && \
  apk add --no-cache \
 	git \
 	libressl2.7-libssl \
