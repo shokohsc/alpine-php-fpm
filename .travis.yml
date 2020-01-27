@@ -33,7 +33,7 @@ before_script:
 
 script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker buildx build --platform="$PLATFORMS" --pull --cache-from "$IMAGE_NAME" --tag "$IMAGE_NAME:latest" --push .
+  - docker buildx build --platform="$PLATFORMS" --pull --cache-from "$IMAGE_NAME" --tag "$IMAGE_NAME:latest" --build-arg FROM_TAG="s6-overlay-v1.22.1.0-alpine-3.9-s6-overlay-arch-amd64" --push .
 
 after_script:
   - docker images
